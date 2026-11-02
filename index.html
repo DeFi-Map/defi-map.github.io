@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeFiMap: see what your DeFi positions actually earned</title>
+  <meta name="description" content="DeFiMap rebuilds every liquidity position from on-chain history and splits its result into price, fees, rewards, gas and impermanent loss, across protocols and wallets, in one dashboard.">
+  <meta name="theme-color" content="#07090a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DeFiMap: see what your DeFi positions actually earned">
+  <meta property="og:description" content="Performance accounting for DeFi liquidity: PnL split into price, fees, rewards, gas and impermanent loss, per position, pool and protocol.">
+  <meta property="og:image" content="assets/img/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="DeFiMap home">
+      <img src="assets/img/logo.svg" alt="" width="86" height="17">
+      <span class="brand-name">DeFiMap</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#why">Why</a>
+      <a href="#product">Product</a>
+      <a href="#different">What's different</a>
+      <a href="#how">How it works</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="https://defi-map.com/">Open the app</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <a href="#why">Why</a><a href="#product">Product</a><a href="#different">What's different</a>
+    <a href="#how">How it works</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a>
+    <a class="btn btn-primary" href="https://defi-map.com/">Open the app</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span>Performance accounting for DeFi liquidity</p>
+      <h1>Your balance <span class="nowrap">went up.</span><br><span class="hl">Did your position actually pay off?</span></h1>
+      <p class="lead">DeFiMap rebuilds every liquidity position from on-chain history and splits its result into
+        <b class="c-price">price</b>, <b class="c-fees">fees</b>, <b class="c-rew">rewards</b>, <b class="c-gas">gas</b> and
+        <b class="c-il">impermanent loss</b>, for every position, pool, protocol and wallet, in one dashboard.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://defi-map.com/">Open the app <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#compare">See the difference</a>
+      </div>
+      <ul class="hero-facts">
+        <li><span class="mono">01</span>Read-only. Paste an address, sign nothing.</li>
+        <li><span class="mono">02</span>Uniswap V2 · V3 · V4, Curve, Convex, StakeDAO, Aave V3</li>
+        <li><span class="mono">03</span>Built on its own on-chain indexer</li>
+      </ul>
+    </div>
+
+    <!-- hero position card mock -->
+    <div class="hero-visual" aria-label="Sample position breakdown">
+      <div class="card pos-card float">
+        <div class="pos-head">
+          <div class="pair">
+            <span class="tok tok-eth">Ξ</span><span class="tok tok-usdc">$</span>
+            <div>
+              <div class="pair-name">ETH / USDC <span class="chip">0.05%</span></div>
+              <div class="muted mono xs">Uniswap V3 · NFT #48213</div>
+            </div>
+          </div>
+          <span class="status in"><i></i>In range</span>
+        </div>
+
+        <div class="pos-kpis">
+          <div><div class="label">Net PnL</div><div class="num big up" data-count="1616" data-prefix="+$">+$1,616</div></div>
+          <div><div class="label">vs holding</div><div class="num up" data-count="616" data-prefix="+$">+$616</div></div>
+          <div><div class="label">IL ate</div><div class="num">28% <span class="muted">of fees</span></div></div>
+        </div>
+
+        <div class="wf" role="img" aria-label="Waterfall: deposit $10,000, price +$1,000, impermanent loss −$260, fees +$914, gas −$38, net $11,616">
+          <div class="wf-bars">
+            <div class="wf-col"><div class="wf-bar b-dep" style="--b:0;--h:33.3" data-v="$10,000"></div><span>Deposit</span></div>
+            <div class="wf-col"><div class="wf-bar b-price" style="--b:33.3;--h:33.4" data-v="+1,000"></div><span>Price</span></div>
+            <div class="wf-col"><div class="wf-bar b-il" style="--b:58;--h:8.7" data-v="−260"></div><span>IL</span></div>
+            <div class="wf-col"><div class="wf-bar b-fees" style="--b:58;--h:30.5" data-v="+914"></div><span>Fees</span></div>
+            <div class="wf-col"><div class="wf-bar b-gas" style="--b:87.2;--h:1.3" data-v="−38"></div><span>Gas</span></div>
+            <div class="wf-col"><div class="wf-bar b-net" style="--b:0;--h:87.2" data-v="$11,616"></div><span>Net</span></div>
+          </div>
+          <div class="wf-axis mono">axis from $9,000</div>
+        </div>
+
+        <div class="pos-rows">
+          <div><span class="sw c-price-bg"></span>Price effect<b class="num up">+$1,000</b></div>
+          <div><span class="sw c-fees-bg"></span>Fees · 0.21 ETH + 410 USDC<b class="num up">+$914</b></div>
+          <div><span class="sw c-il-bg"></span>Impermanent loss<b class="num down">−$260</b></div>
+          <div><span class="sw c-gas-bg"></span>Gas paid<b class="num down">−$38</b></div>
+        </div>
+        <div class="sample-tag mono">Sample position · illustrative numbers</div>
+      </div>
+      <div class="card mini-card mini-range float-2">
+        <div class="label">Range</div>
+        <div class="range">
+          <div class="range-track"><div class="range-band"></div><div class="range-now"></div></div>
+          <div class="range-ticks mono"><span>2,000</span><span>2,400</span><span>2,800</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Why it matters</p>
+      <h2>Most dashboards tell you what you hold.<br>Few tell you how it got there.</h2>
+      <p class="sub">Providing liquidity is not holding tokens. Its result depends on every deposit, withdrawal, fee collection and price move in between, and a balance number hides all of that.</p>
+    </div>
+    <div class="why-grid">
+      <article class="why-card reveal">
+        <div class="why-n mono">01</div>
+        <h3>Balance isn't performance</h3>
+        <p>A position can be up 16% and still trail simply holding the same tokens. Without a holding benchmark you can't tell.</p>
+      </article>
+      <article class="why-card reveal">
+        <div class="why-n mono">02</div>
+        <h3>Fees can hide losses</h3>
+        <p>Impermanent loss quietly eats fee income. If the two aren't separated, a losing position looks like a winner.</p>
+      </article>
+      <article class="why-card reveal">
+        <div class="why-n mono">03</div>
+        <h3>Costs add up</h3>
+        <p>Minting, rebalancing, collecting and staking all cost gas. On small or busy positions it decides the outcome.</p>
+      </article>
+      <article class="why-card reveal">
+        <div class="why-n mono">04</div>
+        <h3>Positions are scattered</h3>
+        <p>Several wallets, several protocols, staking wrappers on top. Comparing them by hand means spreadsheets.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE (interactive) ================= -->
+<section class="section section-alt" id="compare">
+  <div class="wrap compare">
+    <div class="compare-copy">
+      <p class="kicker">Same position, two views</p>
+      <h2>See what a balance number leaves out</h2>
+      <p class="sub">Flip the switch to compare what a typical portfolio view shows with the same Uniswap V3 position, accounted for by DeFiMap.</p>
+      <div class="switch" role="tablist" aria-label="Choose view" data-state="defimap">
+        <button role="tab" aria-selected="false" data-view="tracker">Balance view</button>
+        <button role="tab" aria-selected="true" data-view="defimap">DeFiMap view</button>
+        <span class="switch-thumb" aria-hidden="true"></span>
+      </div>
+      <p class="compare-note mono xs muted">Illustrative numbers for one ETH/USDC position.</p>
+    </div>
+
+    <div class="compare-stage" data-state="defimap">
+      <!-- tracker view -->
+      <div class="card view view-tracker" aria-hidden="true">
+        <div class="view-title"><span class="tok tok-eth">Ξ</span><span class="tok tok-usdc">$</span> ETH / USDC LP</div>
+        <div class="label">Value</div>
+        <div class="num huge">$11,654</div>
+        <div class="num up">+$1,654 · +16.5%</div>
+        <div class="tracker-q">
+          <p>Was that from fees or from ETH going up?</p>
+          <p>How much did gas cost?</p>
+          <p>Would holding have done better?</p>
+        </div>
+      </div>
+      <!-- defimap view -->
+      <div class="card view view-dm">
+        <div class="view-title"><span class="tok tok-eth">Ξ</span><span class="tok tok-usdc">$</span> ETH / USDC · Uniswap V3 <span class="status in"><i></i>In range</span></div>
+        <div class="dm-top">
+          <div><div class="label">Net PnL</div><div class="num huge up">+$1,616</div></div>
+          <div><div class="label">vs holding</div><div class="num big up">+$616</div></div>
+        </div>
+        <div class="dm-bars">
+          <div class="dm-row"><span>Price effect</span><div class="dm-track"><i class="c-price-bg" style="--w:100%"></i></div><b class="num up">+$1,000</b></div>
+          <div class="dm-row"><span>Fees earned</span><div class="dm-track"><i class="c-fees-bg" style="--w:91.4%"></i></div><b class="num up">+$914</b></div>
+          <div class="dm-row"><span>Impermanent loss</span><div class="dm-track"><i class="c-il-bg" style="--w:26%"></i></div><b class="num down">−$260</b></div>
+          <div class="dm-row"><span>Gas paid</span><div class="dm-track"><i class="c-gas-bg" style="--w:3.8%"></i></div><b class="num down">−$38</b></div>
+        </div>
+        <div class="dm-insight"><span class="mono xs">Insight</span> Liquidity beat holding by <b>$616</b>, but impermanent loss took <b>28%</b> of the fees earned.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCT ================= -->
+<section class="section" id="product">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">What you get</p>
+      <h2>Every position, explained down to the token</h2>
+      <p class="sub">One ledger across protocols and wallets, with the numbers broken down instead of summed up.</p>
+    </div>
+
+    <div class="feat-grid">
+      <article class="feat reveal">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>PnL you can explain</h3>
+        <p>Price effect, fees, rewards and gas for each position, rolled up by pool, protocol and portfolio.</p>
+      </article>
+      <article class="feat reveal">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <h3>Impermanent loss from full history</h3>
+        <p>Every deposit, withdrawal and transfer replayed in order. Curve stableswap pools included.</p>
+      </article>
+      <article class="feat reveal">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg></div>
+        <h3>Fees in tokens, not just dollars</h3>
+        <p>See exactly how much of each token a position earned, and what it is worth now.</p>
+      </article>
+      <article class="feat reveal">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8v18H6zM14 8h3l2 2v8a2 2 0 0 1-4 0v-4h-1"/></svg></div>
+        <h3>True cost of ownership</h3>
+        <p>Gas spent on each position, counted once even when a transaction touches several protocols.</p>
+      </article>
+      <article class="feat reveal">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12h20M7 8v8M17 8v8"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3>Range health at a glance</h3>
+        <p>Which concentrated positions are in range and earning, and which have drifted out.</p>
+      </article>
+      <article class="feat reveal">
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M15 15h3"/></svg></div>
+        <h3>Many wallets, one view</h3>
+        <p>Group wallets the way you think about them and see totals per wallet, per group or overall.</p>
+      </article>
+    </div>
+
+    <!-- product mockup with tabs -->
+    <div class="showcase reveal">
+      <div class="tabs" role="tablist" aria-label="Product screens">
+        <button role="tab" aria-selected="true" aria-controls="tab-portfolio" id="t-portfolio">Portfolio</button>
+        <button role="tab" aria-selected="false" aria-controls="tab-position" id="t-position">Position detail</button>
+        <button role="tab" aria-selected="false" aria-controls="tab-history" id="t-history">History</button>
+      </div>
+
+      <div class="browser">
+        <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">defi-map.com</span></div>
+        <div class="app">
+          <aside class="app-side" aria-hidden="true">
+            <img src="assets/img/logo.svg" alt="" class="app-logo">
+            <span class="side-i on">Portfolio</span><span class="side-i">DeFi</span><span class="side-i">Explore</span><span class="side-i">History</span><span class="side-i">Settings</span>
+          </aside>
+
+          <!-- portfolio -->
+          <div class="app-main" role="tabpanel" id="tab-portfolio" aria-labelledby="t-portfolio">
+            <div class="app-head"><h4>Portfolio</h4><div class="seg mono"><span>7D</span><span>1M</span><span class="on">3M</span><span>ALL</span></div></div>
+            <div class="kpis">
+              <div class="kpi"><div class="label">Net worth</div><div class="num">$184,320</div></div>
+              <div class="kpi"><div class="label">Total PnL</div><div class="num up">+$12,480</div></div>
+              <div class="kpi"><div class="label">Fees earned</div><div class="num">$6,214</div></div>
+              <div class="kpi"><div class="label">Imp. loss</div><div class="num down">−$1,930</div></div>
+              <div class="kpi"><div class="label">Gas</div><div class="num">$412</div></div>
+              <div class="kpi"><div class="label">In range</div><div class="num">5 / 7</div></div>
+            </div>
+            <div class="chart">
+              <svg viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#22FBD7" stop-opacity=".28"/><stop offset="1" stop-color="#22FBD7" stop-opacity="0"/></linearGradient></defs>
+                <path class="chart-area" d="M0,92 L40,88 L80,90 L120,80 L160,82 L200,70 L240,74 L280,62 L320,66 L360,52 L400,56 L440,44 L480,48 L520,34 L560,38 L600,26 L600,120 L0,120Z" fill="url(#g1)"/>
+                <path class="chart-line" d="M0,92 L40,88 L80,90 L120,80 L160,82 L200,70 L240,74 L280,62 L320,66 L360,52 L400,56 L440,44 L480,48 L520,34 L560,38 L600,26" fill="none" stroke="#22FBD7" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="tbl" role="table" aria-label="Positions">
+              <div class="tr th" role="row"><span>Position</span><span>Protocol</span><span class="r">Value</span><span class="r">PnL</span><span class="r">Fees</span><span class="r">IL</span><span>Status</span></div>
+              <div class="tr" role="row"><span>ETH / USDC</span><span class="muted">Uniswap V3</span><span class="r num">$11,654</span><span class="r num up">+$1,616</span><span class="r num">$914</span><span class="r num down">−$260</span><span><em class="st in">In range</em></span></div>
+              <div class="tr" role="row"><span>ETH / USDT</span><span class="muted">Uniswap V4</span><span class="r num">$24,180</span><span class="r num up">+$2,310</span><span class="r num">$1,740</span><span class="r num down">−$520</span><span><em class="st in">In range</em></span></div>
+              <div class="tr" role="row"><span>3pool</span><span class="muted">Curve · Convex</span><span class="r num">$52,400</span><span class="r num up">+$1,980</span><span class="r num">$640</span><span class="r num down">−$35</span><span><em class="st stk">Staked</em></span></div>
+              <div class="tr" role="row"><span>WBTC / ETH</span><span class="muted">Uniswap V2</span><span class="r num">$18,950</span><span class="r num down">−$410</span><span class="r num">$380</span><span class="r num down">−$790</span><span><em class="st full">Full range</em></span></div>
+              <div class="tr" role="row"><span>WBTC / USDC</span><span class="muted">Uniswap V3</span><span class="r num">$9,870</span><span class="r num up">+$320</span><span class="r num">$290</span><span class="r num down">−$325</span><span><em class="st out">Out of range</em></span></div>
+            </div>
+          </div>
+
+          <!-- position detail -->
+          <div class="app-main" role="tabpanel" id="tab-position" aria-labelledby="t-position" hidden>
+            <div class="app-head"><h4>ETH / USDC · Uniswap V3 · 0.05%</h4><em class="st in">In range</em></div>
+            <div class="kpis kpis-5">
+              <div class="kpi"><div class="label">Value</div><div class="num">$11,654</div></div>
+              <div class="kpi"><div class="label">PnL</div><div class="num up">+$1,616</div></div>
+              <div class="kpi"><div class="label">Fees</div><div class="num">$914</div></div>
+              <div class="kpi"><div class="label">Gas</div><div class="num">$38 <span class="muted xs">2.4%</span></div></div>
+              <div class="kpi"><div class="label">Imp. loss</div><div class="num down">−$260</div></div>
+            </div>
+            <div class="pd-grid">
+              <div class="pd-box">
+                <div class="label">PnL breakdown</div>
+                <div class="dm-row"><span>Price</span><div class="dm-track"><i class="c-price-bg" style="--w:100%"></i></div><b class="num up">+$1,000</b></div>
+                <div class="dm-row"><span>Fees</span><div class="dm-track"><i class="c-fees-bg" style="--w:91.4%"></i></div><b class="num up">+$914</b></div>
+                <div class="dm-row"><span>Imp. loss</span><div class="dm-track"><i class="c-il-bg" style="--w:26%"></i></div><b class="num down">−$260</b></div>
+                <div class="dm-row"><span>Gas</span><div class="dm-track"><i class="c-gas-bg" style="--w:3.8%"></i></div><b class="num down">−$38</b></div>
+              </div>
+              <div class="pd-box">
+                <div class="label">Range · ETH price in USDC</div>
+                <div class="range lg">
+                  <div class="range-track"><div class="range-band"></div><div class="range-now"></div></div>
+                  <div class="range-ticks mono"><span>2,000</span><span>now 2,400</span><span>2,800</span></div>
+                </div>
+                <div class="label" style="margin-top:14px">Fees earned, in tokens</div>
+                <div class="tok-rows">
+                  <div><span class="tok tok-eth">Ξ</span>0.21 ETH<b class="num">$504</b></div>
+                  <div><span class="tok tok-usdc">$</span>410 USDC<b class="num">$410</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- history -->
+          <div class="app-main" role="tabpanel" id="tab-history" aria-labelledby="t-history" hidden>
+            <div class="app-head"><h4>Transaction history</h4><div class="seg mono"><span class="on">All</span><span>Deposit</span><span>Collect</span><span>Stake</span></div></div>
+            <div class="tbl tbl-h" role="table" aria-label="History">
+              <div class="tr th" role="row"><span>Type</span><span>Position</span><span>Protocol</span><span class="r">Amount</span><span class="r">Gas</span></div>
+              <div class="tr" role="row"><span><em class="ev ev-col">Collect</em></span><span>ETH / USDC</span><span class="muted">Uniswap V3</span><span class="r num">0.06 ETH + 118 USDC</span><span class="r num">$4.10</span></div>
+              <div class="tr" role="row"><span><em class="ev ev-stk">Stake</em></span><span>3pool LP</span><span class="muted">Convex</span><span class="r num">51,800 3CRV</span><span class="r num">$6.80</span></div>
+              <div class="tr" role="row"><span><em class="ev ev-dep">Deposit</em></span><span>ETH / USDT</span><span class="muted">Uniswap V4</span><span class="r num">4.0 ETH + 9,600 USDT</span><span class="r num">$9.20</span></div>
+              <div class="tr" role="row"><span><em class="ev ev-wd">Withdraw</em></span><span>WBTC / USDC</span><span class="muted">Uniswap V3</span><span class="r num">0.03 WBTC + 1,940 USDC</span><span class="r num">$5.40</span></div>
+              <div class="tr" role="row"><span><em class="ev ev-swp">Swap</em></span><span>USDC → ETH</span><span class="muted">Wallet</span><span class="r num">2,000 USDC</span><span class="r num">$3.30</span></div>
+              <div class="tr" role="row"><span><em class="ev ev-dep">Deposit</em></span><span>ETH / USDC</span><span class="muted">Uniswap V3</span><span class="r num">2.5 ETH + 5,000 USDC</span><span class="r num">$11.60</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="sample-tag mono center">Product screens with illustrative data</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIFFERENT ================= -->
+<section class="section section-alt" id="different">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">What's different</p>
+      <h2>Built as a ledger, not a snapshot</h2>
+      <p class="sub">Most tools answer <em>“how much do I have?”</em>. DeFiMap is built to answer <em>“did this position pay off, and why?”</em>, which takes a different foundation.</p>
+    </div>
+    <div class="diff-grid">
+      <article class="diff reveal">
+        <div class="diff-tag mono">Event-sourced</div>
+        <h3>Replays history, not snapshots</h3>
+        <p>Every mint, burn, fee collection and transfer is processed in order, so path-dependent numbers like impermanent loss are computed, not estimated from two balances.</p>
+        <div class="ledger mono" aria-hidden="true">
+          <div><span>MINT</span><span>2.50 ETH · 5,000 USDC</span></div>
+          <div><span>COLLECT</span><span>0.06 ETH · 118 USDC</span></div>
+          <div><span>COLLECT</span><span>0.15 ETH · 292 USDC</span></div>
+          <div><span>NOW</span><span>$10,740 principal · $914 fees</span></div>
+        </div>
+      </article>
+      <article class="diff reveal">
+        <div class="diff-tag mono">One ledger</div>
+        <h3>Across protocols and wrappers</h3>
+        <p>Uniswap V2, V3 and V4, Curve pools staked in Convex or StakeDAO, and Aave V3 sit in one PnL tree, so you can compare them on the same terms.</p>
+        <div class="proto-cloud" aria-hidden="true">
+          <span>Uniswap V2</span><span>Uniswap V3</span><span>Uniswap V4</span><span>Curve</span><span>Convex</span><span>StakeDAO</span><span>Aave V3</span>
+        </div>
+      </article>
+      <article class="diff reveal">
+        <div class="diff-tag mono">Own indexer</div>
+        <h3>Computed from raw chain data</h3>
+        <p>DeFiMap indexes on-chain events itself and does its own math, including concentrated-liquidity and stableswap formulas, instead of reselling aggregated numbers.</p>
+      </article>
+      <article class="diff reveal">
+        <div class="diff-tag mono">Honest coverage</div>
+        <h3>Shows what it can't read yet</h3>
+        <p>Positions in protocols that aren't indexed yet still appear with their value, flagged as not covered, instead of silently disappearing from your total.</p>
+      </article>
+    </div>
+
+    <div class="contrast reveal">
+      <div class="contrast-col">
+        <div class="contrast-h mono">A typical balance view</div>
+        <ul>
+          <li>Current value of each position</li>
+          <li>Change over 24h or 7d</li>
+          <li>Totals in dollars</li>
+          <li>Positions per protocol, side by side</li>
+        </ul>
+      </div>
+      <div class="contrast-arrow" aria-hidden="true">→</div>
+      <div class="contrast-col dm">
+        <div class="contrast-h mono">DeFiMap</div>
+        <ul>
+          <li>Result split into price, fees, rewards, gas and impermanent loss</li>
+          <li>Performance against simply holding the tokens</li>
+          <li>Fees in the tokens you earned them in</li>
+          <li>One comparable PnL tree across protocols and wallets</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">How it works</p>
+      <h2>Three steps, no signatures</h2>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <div class="step-n mono">1</div>
+        <h3>Add a wallet</h3>
+        <p>Paste an address or import it from your browser wallet. DeFiMap only reads public on-chain data. No keys, no approvals, no transactions.</p>
+        <div class="input-mock mono" aria-hidden="true"><span>0x71C7…976F</span><b>Add</b></div>
+      </li>
+      <li class="step reveal">
+        <div class="step-n mono">2</div>
+        <h3>We rebuild the history</h3>
+        <p>Positions, deposits, withdrawals, fee collections and staking moves are found and replayed from the chain.</p>
+        <div class="sync-mock" aria-hidden="true"><div class="sync-bar"><i></i></div><span class="mono xs muted">Syncing positions…</span></div>
+      </li>
+      <li class="step reveal">
+        <div class="step-n mono">3</div>
+        <h3>See what really happened</h3>
+        <p>Open any position to see its full breakdown, or zoom out to pools, protocols, wallet groups and the whole portfolio.</p>
+        <div class="mini-bars" aria-hidden="true"><i style="--h:70%" class="c-price-bg"></i><i style="--h:62%" class="c-fees-bg"></i><i style="--h:22%" class="c-il-bg"></i><i style="--h:8%" class="c-gas-bg"></i></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= WHO ================= -->
+<section class="section section-alt" id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Who it's for</p>
+      <h2>For people who take DeFi seriously</h2>
+    </div>
+    <div class="who-grid">
+      <article class="who reveal">
+        <h3>Liquidity providers</h3>
+        <p>Know which pools and ranges actually earn after impermanent loss and gas, and which only look good.</p>
+      </article>
+      <article class="who reveal">
+        <h3>Portfolio managers</h3>
+        <p>See all DeFi positions across wallets and protocols in one place, grouped the way you manage them.</p>
+      </article>
+      <article class="who reveal">
+        <h3>Analysts and funds</h3>
+        <p>Work from history you can trace back to transactions, not from screenshots and spreadsheets.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROADMAP ================= -->
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Roadmap</p>
+      <h2>Where DeFiMap is going</h2>
+      <p class="sub">Live today: LP performance accounting on Ethereum. Next, seven phases toward a multi-chain DeFi portfolio platform.</p>
+    </div>
+    <div class="rm">
+      <div class="rm-line" aria-hidden="true"></div>
+      <div class="rm-item live reveal"><div class="rm-dot"></div><div class="rm-n mono">Now</div><h3>LP accounting</h3><p>Uniswap V2/V3/V4, Curve, Convex, StakeDAO, Aave V3 state on Ethereum.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c1)"><div class="rm-dot"></div><div class="rm-n mono">01</div><h3>Onboarding &amp; self-service</h3><p>Open sign-up, more sign-in options, full account control.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c2)"><div class="rm-dot"></div><div class="rm-n mono">02</div><h3>Request any AMM</h3><p>Ask for a missing AMM or pool; the platform indexes it.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c3)"><div class="rm-dot"></div><div class="rm-n mono">03</div><h3>Lending &amp; borrowing</h3><p>Aave and other lending markets in the same PnL as LPs.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c4)"><div class="rm-dot"></div><div class="rm-n mono">04</div><h3>Open API &amp; MCP</h3><p>Partners and AI agents use DeFiMap data directly.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c5)"><div class="rm-dot"></div><div class="rm-n mono">05</div><h3>Pool discovery</h3><p>Ranked pools with high potential and visible risk.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c6)"><div class="rm-dot"></div><div class="rm-n mono">06</div><h3>More chains</h3><p>Solana and other chains in one portfolio.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c7)"><div class="rm-dot"></div><div class="rm-n mono">07</div><h3>Ask your portfolio</h3><p>Chat about performance and opportunities, backed by real numbers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section section-alt" id="faq">
+  <div class="wrap faq-wrap">
+    <div class="sec-head left">
+      <p class="kicker">FAQ</p>
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need to connect my wallet or sign anything?</summary>
+        <p>No. You paste an address or import it from your browser wallet. DeFiMap only reads public on-chain data. It never asks for signatures, approvals or keys, and it can't move funds.</p>
+      </details>
+      <details>
+        <summary>Which networks and protocols are supported?</summary>
+        <p>Today: Ethereum mainnet with Uniswap V2, V3 and V4, Curve (including pools staked in Convex and StakeDAO) and Aave V3 positions. More chains and protocols are on the roadmap.</p>
+      </details>
+      <details>
+        <summary>How is impermanent loss calculated?</summary>
+        <p>Against simply holding the tokens you deposited. DeFiMap replays every deposit, withdrawal and transfer of the position in order, so adding or removing liquidity along the way is accounted for.</p>
+      </details>
+      <details>
+        <summary>What if my protocol isn't supported yet?</summary>
+        <p>Those positions still show up with their value, marked as not indexed, so your total stays honest. Requesting support for a new AMM is the next phase on the roadmap.</p>
+      </details>
+      <details>
+        <summary>Can I use DeFiMap today?</summary>
+        <p>DeFiMap is in closed beta. You sign in with Google, and access is currently by invitation. Open sign-up is the first phase on the roadmap.</p>
+      </details>
+      <details>
+        <summary>Is this investment advice?</summary>
+        <p>No. DeFiMap is an analytics tool. It shows what happened to your positions and why; decisions stay with you.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap cta-in">
+    <img src="assets/img/logo.svg" alt="" class="cta-logo">
+    <h2>Stop guessing what your liquidity earned.</h2>
+    <p class="sub">Add a wallet and see every position broken down to the token.</p>
+    <div class="hero-actions center">
+      <a class="btn btn-primary" href="https://defi-map.com/">Open the app <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="#roadmap">View the roadmap</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="brand"><img src="assets/img/logo.svg" alt="" width="70" height="14"><span class="brand-name">DeFiMap</span></div>
+    <nav aria-label="Footer"><a href="#product">Product</a><a href="#different">What's different</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a><a href="https://defi-map.com/">App</a></nav>
+    <p class="muted xs">© <span id="year">2026</span> DeFiMap. Analytics only, not investment advice. Figures shown on this page are illustrative.</p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
