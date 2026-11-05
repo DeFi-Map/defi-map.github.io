@@ -55,10 +55,10 @@
   const items = $$('.a-steps li');
   const big = $('[data-big]', vis);
   const lbl = $('[data-label]', vis);
-  const readouts = () => (window.DM_I18N ? window.DM_I18N.readouts(window.DM_I18N.lang) : null);
+  const readouts = JSON.parse($('#readouts').textContent);
   let curStep = -1;
-  const setStep = (s, force) => {
-    if (s === curStep && !force) return;
+  const setStep = (s) => {
+    if (s === curStep) return;
     curStep = s;
     vis.dataset.step = s;
     cols.forEach((c, i) => {
@@ -66,14 +66,17 @@
       c.classList.toggle('dim', s === 5 && i > 0 && i < 5);
     });
     items.forEach((li, i) => { li.classList.toggle('on', i === s); li.classList.toggle('done', i < s); });
-    const r = readouts();
-    if (r) { lbl.textContent = r[s][0]; big.textContent = r[s][1]; }
+    lbl.textContent = readouts[s][0];
+    big.textContent = readouts[s][1];
     big.className = 'a-big num' + (s === 5 ? ' up' : '');
   };
   setStep(0);
 
-  // Re-split the statement and refresh the readout when the language changes.
-  document.addEventListener('dm:lang', () => { splitWords(); setStep(curStep, true); onScroll(); });
+  // Remember an explicit language choice so the root URL sends the visitor back here; keep the anchor.
+  $$('.lang a').forEach((a) => a.addEventListener('click', (e) => {
+    try { localStorage.setItem('dm-lang', a.dataset.lang); } catch (_) { /* private mode */ }
+    if (location.hash) { e.preventDefault(); location.href = a.getAttribute('href') + location.hash; }
+  }));
 
   // ---------- one rAF-throttled scroll loop ----------
   const device = $('[data-tilt]');

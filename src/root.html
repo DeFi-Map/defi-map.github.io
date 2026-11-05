@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeFiMap</title>
+  <meta name="theme-color" content="#000000">
+  <link rel="alternate" hreflang="en" href="https://defi-map.github.io/en/">
+  <link rel="alternate" hreflang="ru" href="https://defi-map.github.io/ru/">
+  <link rel="alternate" hreflang="x-default" href="https://defi-map.github.io/">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <script>
+    // Send visitors to /en/ or /ru/: their saved choice first, then browser languages, then English.
+    (function () {
+      var ok = { en: 1, ru: 1 }, l = null;
+      try { l = localStorage.getItem('dm-lang'); } catch (e) {}
+      if (!ok[l]) {
+        l = null;
+        var a = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < a.length && !l; i++) { var b = String(a[i]).toLowerCase().slice(0, 2); if (ok[b]) l = b; }
+      }
+      location.replace('/' + (l || 'en') + '/' + location.hash);
+    })();
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url=/en/"></noscript>
+  <style>body { background: #000; color: #a1a8ad; font: 15px/1.6 system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; } a { color: #22fbd7; }</style>
+</head>
+<body>
+  <p><a href="/en/" hreflang="en">English</a> · <a href="/ru/" hreflang="ru" lang="ru">Русский</a></p>
+</body>
+</html>

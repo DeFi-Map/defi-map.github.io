@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "locale": "en_US",
+    "title": "DeFiMap: every position, explained",
+    "description": "DeFiMap rebuilds every liquidity position from on-chain history and splits its result into price, fees, rewards, gas and impermanent loss, across protocols and wallets, in one dashboard.",
+    "ogDescription": "Performance accounting for DeFi liquidity: PnL split into price, fees, rewards, gas and impermanent loss, per position, pool and protocol."
+  },
+  "readouts": [
+    [
+      "Deposit",
+      "$10,000"
+    ],
+    [
+      "If you had held",
+      "$11,000"
+    ],
+    [
+      "After impermanent loss",
+      "$10,740"
+    ],
+    [
+      "With fees earned",
+      "$11,654"
+    ],
+    [
+      "After gas",
+      "$11,616"
+    ],
+    [
+      "Net PnL",
+      "+$1,616"
+    ]
+  ],
+  "strings": {}
+}

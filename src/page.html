@@ -3,43 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DeFiMap: every position, explained</title>
-  <meta name="description" content="DeFiMap rebuilds every liquidity position from on-chain history and splits its result into price, fees, rewards, gas and impermanent loss, across protocols and wallets, in one dashboard.">
+  <title>DeFiMap</title>
+  <meta name="description" content="">
   <meta name="theme-color" content="#000000">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://defi-map.github.io/">
-  <link rel="canonical" href="https://defi-map.github.io/">
-  <meta property="og:title" content="DeFiMap: every position, explained">
-  <meta property="og:description" content="Performance accounting for DeFi liquidity: PnL split into price, fees, rewards, gas and impermanent loss, per position, pool and protocol.">
+  <meta property="og:site_name" content="DeFiMap">
+  <meta property="og:url" content="">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
   <meta property="og:image" content="https://defi-map.github.io/assets/img/og.png">
+  <meta property="og:locale" content="">
   <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:locale:alternate" content="ru_RU">
-  <link rel="alternate" hreflang="en" href="https://defi-map.github.io/?lang=en">
-  <link rel="alternate" hreflang="ru" href="https://defi-map.github.io/?lang=ru">
+  <link rel="canonical" href="">
+  <link rel="alternate" hreflang="en" href="https://defi-map.github.io/en/">
+  <link rel="alternate" hreflang="ru" href="https://defi-map.github.io/ru/">
   <link rel="alternate" hreflang="x-default" href="https://defi-map.github.io/">
-  <script>
-    // Pick the language before first paint: ?lang= > saved choice > browser languages > English.
-    (function () {
-      var d = document.documentElement, ok = { en: 1, ru: 1 }, l = null;
-      try {
-        var q = new URLSearchParams(location.search).get('lang'), s = localStorage.getItem('dm-lang');
-        l = ok[q] ? q : ok[s] ? s : null;
-        if (!l) {
-          var a = navigator.languages || [navigator.language || ''];
-          for (var i = 0; i < a.length && !l; i++) { var b = String(a[i]).toLowerCase().slice(0, 2); if (ok[b]) l = b; }
-        }
-      } catch (e) {}
-      d.lang = l || 'en';
-      if (d.lang !== 'en') { d.classList.add('i18n-wait'); setTimeout(function () { d.classList.remove('i18n-wait'); }, 1500); }
-    })();
-  </script>
-  <style>.i18n-wait body { opacity: 0; }</style>
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -48,7 +31,7 @@
 <header class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top" aria-label="DeFiMap home">
-      <img src="assets/img/logo.svg" alt="" width="80" height="16">
+      <img src="/assets/img/logo.svg" alt="" width="80" height="16">
       <span class="brand-name">DeFiMap</span>
     </a>
     <nav class="nav-links" aria-label="Main">
@@ -59,10 +42,10 @@
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
-      </div>
+      <nav class="lang" aria-label="Language">
+        <a href="/en/" hreflang="en" lang="en" data-lang="en">EN</a>
+        <a href="/ru/" hreflang="ru" lang="ru" data-lang="ru">RU</a>
+      </nav>
       <a class="btn btn-primary btn-sm nav-open" href="https://defi-map.com/" data-i18n="cta.open">Open the app</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
     </div>
@@ -96,7 +79,7 @@
         <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">defi-map.com</span></div>
         <div class="app">
           <aside class="app-side" aria-hidden="true">
-            <img src="assets/img/logo.svg" alt="" class="app-logo">
+            <img src="/assets/img/logo.svg" alt="" class="app-logo">
             <span class="side-i on">Portfolio</span><span class="side-i">DeFi</span><span class="side-i">Explore</span><span class="side-i">History</span><span class="side-i">Settings</span>
           </aside>
 
@@ -432,7 +415,7 @@
 <section class="cta">
   <div class="cta-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <img src="assets/img/logo.svg" alt="" class="cta-logo">
+    <img src="/assets/img/logo.svg" alt="" class="cta-logo">
     <h2 data-i18n="cta.title">Stop guessing.<br><span class="grad">Start knowing.</span></h2>
     <div class="actions center">
       <a class="btn btn-primary btn-lg" href="https://defi-map.com/" data-i18n="cta.open">Open the app</a>
@@ -445,13 +428,13 @@
 
 <footer class="foot">
   <div class="wrap foot-in">
-    <div class="brand"><img src="assets/img/logo.svg" alt="" width="64" height="13"><span class="brand-name">DeFiMap</span></div>
+    <div class="brand"><img src="/assets/img/logo.svg" alt="" width="64" height="13"><span class="brand-name">DeFiMap</span></div>
     <nav aria-label="Footer"><a href="#anatomy" data-i18n="nav.anatomy">Anatomy</a><a href="#features" data-i18n="nav.features">Features</a><a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a><a href="#faq" data-i18n="nav.faq">FAQ</a><a href="https://defi-map.com/" data-i18n="foot.app">App</a></nav>
     <p class="fine">© <span id="year">2026</span> DeFiMap. <span data-i18n="foot.note">Analytics only, not investment advice. Figures on this page are illustrative.</span></p>
   </div>
 </footer>
 
-<script src="assets/js/i18n.js" defer></script>
-<script src="assets/js/site.js" defer></script>
+<script type="application/json" id="readouts">[]</script>
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>

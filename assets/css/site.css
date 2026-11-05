@@ -81,9 +81,9 @@ h2 { font-size: clamp(40px, 6vw, 80px); font-weight: 700; text-wrap: balance; }
 .nav-links a:hover, .nav-links a.active { color: var(--fg); }
 .nav-cta { display: flex; align-items: center; gap: 12px; }
 .lang { display: flex; padding: 2px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line); }
-.lang button { border: 0; background: transparent; color: var(--fg-2); font: 600 11.5px var(--mono); letter-spacing: .04em; padding: 5px 9px; border-radius: 999px; cursor: pointer; transition: color .25s, background .25s; }
-.lang button:hover { color: var(--fg); }
-.lang button[aria-pressed="true"] { background: var(--fg); color: #000; }
+.lang a { color: var(--fg-2); font: 600 11.5px var(--mono); letter-spacing: .04em; padding: 5px 9px; border-radius: 999px; transition: color .25s, background .25s; }
+.lang a:hover { color: var(--fg); }
+.lang a[aria-current="page"] { background: var(--fg); color: #000; }
 .nav-toggle { display: none; width: 38px; height: 34px; border: 0; background: transparent; cursor: pointer; padding: 0 9px; }
 .nav-toggle span { display: block; height: 1.5px; background: var(--fg); margin: 6px 0; transition: transform .3s var(--ease); }
 .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.75px) rotate(45deg); }

@@ -1,13 +1,20 @@
 # DeFiMap landing page
 
-Static site served by GitHub Pages. No build step: `index.html`, `assets/css/site.css`, `assets/js/site.js`.
+Served by GitHub Pages at https://defi-map.github.io/ — `/en/` and `/ru/`, with `/` redirecting to the visitor's language (saved choice, then browser languages, then English).
 
-Two languages. English copy lives in `index.html`; Russian is in `assets/js/i18n.js`, keyed by each element's `data-i18n` attribute. The language is picked by `?lang=en|ru`, then the visitor's saved choice, then browser languages, falling back to English.
+- `src/page.html` — page template; English copy is inline, translatable elements carry `data-i18n` keys
+- `src/i18n/en.json`, `src/i18n/ru.json` — page metadata, scroll-story readouts, and (for Russian) every `data-i18n` string
+- `src/root.html` — the `/` redirect page
+- `assets/` — CSS, JS, images, shared by both languages
+- `build.mjs` — writes `dist/`; fails if a language misses or has extra keys
+
+Pushes to `main` build and deploy via `.github/workflows/pages.yml`.
 
 Preview locally:
 
 ```sh
-python3 -m http.server 8765
+bun build.mjs
+cd dist && python3 -m http.server 8765
 # open http://127.0.0.1:8765/
 ```
 
