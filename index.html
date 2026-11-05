@@ -13,6 +13,28 @@
   <meta property="og:description" content="Performance accounting for DeFi liquidity: PnL split into price, fees, rewards, gas and impermanent loss, per position, pool and protocol.">
   <meta property="og:image" content="https://defi-map.github.io/assets/img/og.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <link rel="alternate" hreflang="en" href="https://defi-map.github.io/?lang=en">
+  <link rel="alternate" hreflang="ru" href="https://defi-map.github.io/?lang=ru">
+  <link rel="alternate" hreflang="x-default" href="https://defi-map.github.io/">
+  <script>
+    // Pick the language before first paint: ?lang= > saved choice > browser languages > English.
+    (function () {
+      var d = document.documentElement, ok = { en: 1, ru: 1 }, l = null;
+      try {
+        var q = new URLSearchParams(location.search).get('lang'), s = localStorage.getItem('dm-lang');
+        l = ok[q] ? q : ok[s] ? s : null;
+        if (!l) {
+          var a = navigator.languages || [navigator.language || ''];
+          for (var i = 0; i < a.length && !l; i++) { var b = String(a[i]).toLowerCase().slice(0, 2); if (ok[b]) l = b; }
+        }
+      } catch (e) {}
+      d.lang = l || 'en';
+      if (d.lang !== 'en') { d.classList.add('i18n-wait'); setTimeout(function () { d.classList.remove('i18n-wait'); }, 1500); }
+    })();
+  </script>
+  <style>.i18n-wait body { opacity: 0; }</style>
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +42,7 @@
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
 <!-- ================= NAV ================= -->
 <header class="nav">
@@ -30,21 +52,25 @@
       <span class="brand-name">DeFiMap</span>
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="#anatomy">Anatomy</a>
-      <a href="#features">Features</a>
-      <a href="#compare">Compare</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#faq">FAQ</a>
+      <a href="#anatomy" data-i18n="nav.anatomy">Anatomy</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#compare" data-i18n="nav.compare">Compare</a>
+      <a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary btn-sm" href="https://defi-map.com/">Open the app</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+      <a class="btn btn-primary btn-sm nav-open" href="https://defi-map.com/" data-i18n="cta.open">Open the app</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
     </div>
   </div>
   <div class="mobile-menu" id="mobile-menu" hidden>
-    <a href="#anatomy">Anatomy</a><a href="#features">Features</a><a href="#compare">Compare</a>
-    <a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a>
-    <a class="btn btn-primary" href="https://defi-map.com/">Open the app</a>
+    <a href="#anatomy" data-i18n="nav.anatomy">Anatomy</a><a href="#features" data-i18n="nav.features">Features</a><a href="#compare" data-i18n="nav.compare">Compare</a>
+    <a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a><a href="#faq" data-i18n="nav.faq">FAQ</a>
+    <a class="btn btn-primary" href="https://defi-map.com/" data-i18n="cta.open">Open the app</a>
   </div>
 </header>
 
@@ -54,12 +80,12 @@
 <section class="hero" id="top">
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="wrap hero-copy">
-    <p class="eyebrow fade" style="--d:0">Introducing DeFiMap</p>
-    <h1 class="fade" style="--d:1">Every position.<br><span class="grad">Explained.</span></h1>
-    <p class="lead fade" style="--d:2">Your DeFi balance tells you what you have. DeFiMap tells you what each position earned, what it cost, and why.</p>
+    <p class="eyebrow fade" style="--d:0" data-i18n="hero.eyebrow">Introducing DeFiMap</p>
+    <h1 class="fade" style="--d:1" data-i18n="hero.title">Every position.<br><span class="grad">Explained.</span></h1>
+    <p class="lead fade" style="--d:2" data-i18n="hero.lead">Your DeFi balance tells you what you have. DeFiMap tells you what each position earned, what it cost, and why.</p>
     <div class="actions fade" style="--d:3">
-      <a class="btn btn-primary btn-lg" href="https://defi-map.com/">Open the app</a>
-      <a class="link-more" href="#anatomy">See how it works <span aria-hidden="true">›</span></a>
+      <a class="btn btn-primary btn-lg" href="https://defi-map.com/" data-i18n="cta.open">Open the app</a>
+      <a class="link-more" href="#anatomy" data-i18n="hero.more">See how it works <span aria-hidden="true">›</span></a>
     </div>
   </div>
 
@@ -147,18 +173,18 @@
       </div>
     </div>
     <div class="tabs" role="tablist" aria-label="Product screens">
-      <button role="tab" aria-selected="true" aria-controls="tab-portfolio" id="t-portfolio">Portfolio</button>
-      <button role="tab" aria-selected="false" aria-controls="tab-position" id="t-position">Position</button>
-      <button role="tab" aria-selected="false" aria-controls="tab-history" id="t-history">History</button>
+      <button role="tab" aria-selected="true" aria-controls="tab-portfolio" id="t-portfolio" data-i18n="tab.portfolio">Portfolio</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-position" id="t-position" data-i18n="tab.position">Position</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-history" id="t-history" data-i18n="tab.history">History</button>
     </div>
-    <p class="fine center">Illustrative data</p>
+    <p class="fine center" data-i18n="fine.data">Illustrative data</p>
   </div>
 </section>
 
 <!-- ================= STATEMENT ================= -->
 <section class="statement" aria-label="Why DeFiMap">
   <div class="wrap">
-    <p class="words" data-words>A balance is a single number. A liquidity position is a story: every deposit, every withdrawal, every fee collected, every price move. Most dashboards show the number. DeFiMap reads the story.</p>
+    <p class="words" data-words data-i18n="statement">A balance is a single number. A liquidity position is a story: every deposit, every withdrawal, every fee collected, every price move. Most dashboards show the number. <span data-hl>DeFiMap reads the story.</span></p>
   </div>
 </section>
 
@@ -167,34 +193,34 @@
   <div class="anatomy-sticky">
     <div class="wrap anatomy-in">
       <div class="anatomy-copy">
-        <p class="eyebrow">The anatomy of a position</p>
-        <h2 class="a-title">One number.<br>Five answers.</h2>
+        <p class="eyebrow" data-i18n="a.eyebrow">The anatomy of a position</p>
+        <h2 class="a-title" data-i18n="a.title">One number.<br>Five answers.</h2>
         <ol class="a-steps">
-          <li data-s="0"><b>You deposited $10,000.</b><span>2.5 ETH and 5,000 USDC into a Uniswap V3 pool.</span></li>
-          <li data-s="1"><b>ETH went up.</b><span>Holding the same tokens would have earned <em class="c-price">+$1,000</em>.</span></li>
-          <li data-s="2"><b>The pool rebalanced you.</b><span>Impermanent loss: <em class="c-il">−$260</em> against holding.</span></li>
-          <li data-s="3"><b>Traders paid you.</b><span>Fees: 0.21 ETH and 410 USDC, worth <em class="c-fees">+$914</em>.</span></li>
-          <li data-s="4"><b>The chain charged you.</b><span>Gas for minting and collecting: <em class="c-gas">−$38</em>.</span></li>
-          <li data-s="5"><b>The verdict.</b><span>Net <em class="up">+$1,616</em>. Liquidity beat holding by <em class="up">$616</em>.</span></li>
+          <li data-s="0" data-i18n="a.s0"><b>You deposited $10,000.</b><span>2.5 ETH and 5,000 USDC into a Uniswap V3 pool.</span></li>
+          <li data-s="1" data-i18n="a.s1"><b>ETH went up.</b><span>Holding the same tokens would have earned <em class="c-price">+$1,000</em>.</span></li>
+          <li data-s="2" data-i18n="a.s2"><b>The pool rebalanced you.</b><span>Impermanent loss: <em class="c-il">−$260</em> against holding.</span></li>
+          <li data-s="3" data-i18n="a.s3"><b>Traders paid you.</b><span>Fees: 0.21 ETH and 410 USDC, worth <em class="c-fees">+$914</em>.</span></li>
+          <li data-s="4" data-i18n="a.s4"><b>The chain charged you.</b><span>Gas for minting and collecting: <em class="c-gas">−$38</em>.</span></li>
+          <li data-s="5" data-i18n="a.s5"><b>The verdict.</b><span>Net <em class="up">+$1,616</em>. Liquidity beat holding by <em class="up">$616</em>.</span></li>
         </ol>
       </div>
 
       <div class="a-visual" data-step="0" aria-hidden="true">
         <div class="a-readout">
           <div class="label" data-label>Deposit</div>
-          <div class="a-row"><div class="a-big num" data-big>$10,000</div><div class="a-sub num up" data-sub>vs holding +$616</div></div>
+          <div class="a-row"><div class="a-big num" data-big>$10,000</div><div class="a-sub num up" data-sub data-i18n="a.sub">vs holding +$616</div></div>
         </div>
         <div class="a-chart">
-          <div class="a-col" data-c="0"><i class="bar bg-dep" style="--b:0;--h:33.3"></i><span>Deposit</span></div>
-          <div class="a-col" data-c="1"><i class="bar bg-price" style="--b:33.3;--h:33.4"></i><span>Price</span></div>
+          <div class="a-col" data-c="0"><i class="bar bg-dep" style="--b:0;--h:33.3"></i><span data-i18n="col.dep">Deposit</span></div>
+          <div class="a-col" data-c="1"><i class="bar bg-price" style="--b:33.3;--h:33.4"></i><span data-i18n="col.price">Price</span></div>
           <div class="a-col" data-c="2"><i class="bar bg-il" style="--b:58;--h:8.7"></i><span>IL</span></div>
-          <div class="a-col" data-c="3"><i class="bar bg-fees" style="--b:58;--h:30.5"></i><span>Fees</span></div>
-          <div class="a-col" data-c="4"><i class="bar bg-gas" style="--b:87.2;--h:1.6"></i><span>Gas</span></div>
-          <div class="a-col" data-c="5"><i class="bar bg-net" style="--b:0;--h:87.2"></i><span>Net</span></div>
-          <div class="a-hold" style="--y:66.7"><span class="mono">holding $11,000</span></div>
+          <div class="a-col" data-c="3"><i class="bar bg-fees" style="--b:58;--h:30.5"></i><span data-i18n="col.fees">Fees</span></div>
+          <div class="a-col" data-c="4"><i class="bar bg-gas" style="--b:87.2;--h:1.6"></i><span data-i18n="col.gas">Gas</span></div>
+          <div class="a-col" data-c="5"><i class="bar bg-net" style="--b:0;--h:87.2"></i><span data-i18n="col.net">Net</span></div>
+          <div class="a-hold" style="--y:66.7"><span class="mono" data-i18n="a.hold">holding $11,000</span></div>
         </div>
         <div class="a-progress"><i></i></div>
-        <p class="fine">Illustrative position · chart axis starts at $9,000</p>
+        <p class="fine" data-i18n="a.fine">Illustrative position · chart axis starts at $9,000</p>
       </div>
     </div>
   </div>
@@ -204,18 +230,18 @@
 <section class="section" id="features">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">What you get</p>
-      <h2>Built for the questions<br><span class="grad-soft">a balance can't answer.</span></h2>
+      <p class="eyebrow" data-i18n="f.eyebrow">What you get</p>
+      <h2 data-i18n="f.title">Built for the questions<br><span class="grad-soft">a balance can't answer.</span></h2>
     </div>
 
     <div class="bento">
       <article class="tile t-wide reveal">
         <div class="tile-copy">
-          <h3>PnL you can explain.</h3>
-          <p>Price effect, fees, rewards, gas and impermanent loss for every position, rolled up by pool, protocol, wallet and portfolio.</p>
+          <h3 data-i18n="f.pnl.h">PnL you can explain.</h3>
+          <p data-i18n="f.pnl.p">Price effect, fees, rewards, gas and impermanent loss for every position, rolled up by pool, protocol, wallet and portfolio.</p>
         </div>
         <div class="tree" aria-hidden="true">
-          <div class="tree-row lvl0"><span>Portfolio</span><b class="num up">+$12,480</b></div>
+          <div class="tree-row lvl0"><span data-i18n="tab.portfolio">Portfolio</span><b class="num up">+$12,480</b></div>
           <div class="tree-row lvl1"><span>Uniswap V3</span><b class="num up">+$1,936</b></div>
           <div class="tree-row lvl2"><span>ETH / USDC</span><b class="num up">+$1,616</b></div>
           <div class="tree-split">
@@ -226,51 +252,51 @@
 
       <article class="tile t-tall reveal">
         <div class="tile-copy">
-          <h3>Impermanent loss, from full history.</h3>
-          <p>Every mint, burn, collect and transfer replayed in order. Curve stableswap pools included.</p>
+          <h3 data-i18n="f.il.h">Impermanent loss, from full history.</h3>
+          <p data-i18n="f.il.p">Every mint, burn, collect and transfer replayed in order. Curve stableswap pools included.</p>
         </div>
         <div class="ledger mono" aria-hidden="true">
           <div><span>MINT</span><span>2.50 ETH · 5,000 USDC</span></div>
           <div><span>COLLECT</span><span>0.06 ETH · 118 USDC</span></div>
           <div><span>COLLECT</span><span>0.15 ETH · 292 USDC</span></div>
-          <div class="now"><span>IL NOW</span><span class="c-il">−$260</span></div>
+          <div class="now"><span data-i18n="f.il.now">IL NOW</span><span class="c-il">−$260</span></div>
         </div>
       </article>
 
       <article class="tile reveal">
-        <h3>Fees in tokens.</h3>
-        <p>Exactly what you earned, in the tokens you earned it in.</p>
+        <h3 data-i18n="f.fees.h">Fees in tokens.</h3>
+        <p data-i18n="f.fees.p">Exactly what you earned, in the tokens you earned it in.</p>
         <div class="tok-pills" aria-hidden="true"><span><i class="tok tok-eth">Ξ</i>0.21 ETH</span><span><i class="tok tok-usdc">$</i>410 USDC</span></div>
       </article>
 
       <article class="tile reveal">
-        <h3>Gas, counted once.</h3>
-        <p>Per position, without double counting across protocols.</p>
+        <h3 data-i18n="f.gas.h">Gas, counted once.</h3>
+        <p data-i18n="f.gas.p">Per position, without double counting across protocols.</p>
         <div class="tile-num num c-gas" aria-hidden="true">$38</div>
       </article>
 
       <article class="tile reveal">
-        <h3>Range health.</h3>
-        <p>In range and earning, or drifted out.</p>
+        <h3 data-i18n="f.range.h">Range health.</h3>
+        <p data-i18n="f.range.p">In range and earning, or drifted out.</p>
         <div class="range" aria-hidden="true"><div class="range-track"><div class="range-band"></div><div class="range-now"></div></div></div>
       </article>
 
       <article class="tile t-wide3 reveal">
         <div class="tile-copy">
-          <h3>Honest coverage.</h3>
-          <p>Positions we can't index yet still show up, with their value. Nothing silently disappears from your total.</p>
+          <h3 data-i18n="f.cov.h">Honest coverage.</h3>
+          <p data-i18n="f.cov.p">Positions we can't index yet still show up, with their value. Nothing silently disappears from your total.</p>
         </div>
         <div class="uncov" aria-hidden="true">
           <span class="uncov-dot"></span>
-          <span><b>2 positions</b> · <span class="num">$3,120</span> not indexed yet</span>
-          <span class="uncov-tag mono">Shown, not hidden</span>
+          <span data-i18n="f.cov.row"><b>2 positions</b> · <span class="num">$3,120</span> not indexed yet</span>
+          <span class="uncov-tag mono" data-i18n="f.cov.tag">Shown, not hidden</span>
         </div>
       </article>
 
       <article class="tile t-full reveal">
         <div class="tile-copy">
-          <h3>One ledger. Every protocol.</h3>
-          <p>Uniswap V2, V3, V4, Curve pools staked in Convex or StakeDAO, and Aave V3, compared on the same terms, across all your wallets.</p>
+          <h3 data-i18n="f.ledger.h">One ledger. Every protocol.</h3>
+          <p data-i18n="f.ledger.p">Uniswap V2, V3, V4, Curve pools staked in Convex or StakeDAO, and Aave V3, compared on the same terms, across all your wallets.</p>
         </div>
         <div class="marquee" aria-hidden="true">
           <div class="marquee-in">
@@ -288,43 +314,43 @@
 <section class="section compare-sec" id="compare">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Same position, two views</p>
-      <h2>See what a balance<br>leaves out.</h2>
+      <p class="eyebrow" data-i18n="c.eyebrow">Same position, two views</p>
+      <h2 data-i18n="c.title">See what a balance<br>leaves out.</h2>
     </div>
     <div class="switch" role="tablist" aria-label="Choose view" data-state="defimap">
-      <button role="tab" aria-selected="false" data-view="tracker">Balance view</button>
-      <button role="tab" aria-selected="true" data-view="defimap">DeFiMap view</button>
+      <button role="tab" aria-selected="false" data-view="tracker" data-i18n="c.tracker">Balance view</button>
+      <button role="tab" aria-selected="true" data-view="defimap" data-i18n="c.dm">DeFiMap view</button>
       <span class="switch-thumb" aria-hidden="true"></span>
     </div>
 
     <div class="compare-stage" data-state="defimap">
       <div class="card view view-tracker" aria-hidden="true">
         <div class="view-title"><span class="tok tok-eth">Ξ</span><span class="tok tok-usdc">$</span> ETH / USDC LP</div>
-        <div class="label">Value</div>
+        <div class="label" data-i18n="c.value">Value</div>
         <div class="num huge">$11,654</div>
         <div class="num up">+$1,654 · +16.5%</div>
         <div class="tracker-q">
-          <p>Was that fees, or just ETH going up?</p>
-          <p>How much did gas cost?</p>
-          <p>Would holding have done better?</p>
+          <p data-i18n="c.q1">Was that fees, or just ETH going up?</p>
+          <p data-i18n="c.q2">How much did gas cost?</p>
+          <p data-i18n="c.q3">Would holding have done better?</p>
         </div>
       </div>
       <div class="card view view-dm">
-        <div class="view-title"><span class="tok tok-eth">Ξ</span><span class="tok tok-usdc">$</span> ETH / USDC · Uniswap V3 <em class="st in">In range</em></div>
+        <div class="view-title"><span class="tok tok-eth">Ξ</span><span class="tok tok-usdc">$</span> ETH / USDC · Uniswap V3 <em class="st in" data-i18n="c.inrange">In range</em></div>
         <div class="dm-top">
-          <div><div class="label">Net PnL</div><div class="num huge up">+$1,616</div></div>
-          <div><div class="label">vs holding</div><div class="num big up">+$616</div></div>
+          <div><div class="label" data-i18n="c.net">Net PnL</div><div class="num huge up">+$1,616</div></div>
+          <div><div class="label" data-i18n="c.vshold">vs holding</div><div class="num big up">+$616</div></div>
         </div>
         <div class="dm-bars">
-          <div class="hb"><span>Price effect</span><div class="hb-t"><i class="bg-price" style="--w:100%"></i></div><b class="num up">+$1,000</b></div>
-          <div class="hb"><span>Fees earned</span><div class="hb-t"><i class="bg-fees" style="--w:91.4%"></i></div><b class="num up">+$914</b></div>
-          <div class="hb"><span>Impermanent loss</span><div class="hb-t"><i class="bg-il" style="--w:26%"></i></div><b class="num down">−$260</b></div>
-          <div class="hb"><span>Gas paid</span><div class="hb-t"><i class="bg-gas" style="--w:3.8%"></i></div><b class="num down">−$38</b></div>
+          <div class="hb"><span data-i18n="c.b.price">Price effect</span><div class="hb-t"><i class="bg-price" style="--w:100%"></i></div><b class="num up">+$1,000</b></div>
+          <div class="hb"><span data-i18n="c.b.fees">Fees earned</span><div class="hb-t"><i class="bg-fees" style="--w:91.4%"></i></div><b class="num up">+$914</b></div>
+          <div class="hb"><span data-i18n="c.b.il">Impermanent loss</span><div class="hb-t"><i class="bg-il" style="--w:26%"></i></div><b class="num down">−$260</b></div>
+          <div class="hb"><span data-i18n="c.b.gas">Gas paid</span><div class="hb-t"><i class="bg-gas" style="--w:3.8%"></i></div><b class="num down">−$38</b></div>
         </div>
-        <div class="insight"><span class="mono">Insight</span>Liquidity beat holding by <b>$616</b>, but impermanent loss took <b>28%</b> of the fees.</div>
+        <div class="insight" data-i18n="c.insight"><span class="mono">Insight</span>Liquidity beat holding by <b>$616</b>, but impermanent loss took <b>28%</b> of the fees.</div>
       </div>
     </div>
-    <p class="fine center">Illustrative numbers for one ETH/USDC position</p>
+    <p class="fine center" data-i18n="c.fine">Illustrative numbers for one ETH/USDC position</p>
   </div>
 </section>
 
@@ -334,12 +360,12 @@
     <div class="lock" aria-hidden="true">
       <svg viewBox="0 0 64 64"><rect x="12" y="28" width="40" height="28" rx="6"/><path d="M20 28v-8a12 12 0 0 1 24 0v8"/><circle cx="32" cy="42" r="3"/></svg>
     </div>
-    <h2>Paste an address.<br><span class="grad">Sign nothing.</span></h2>
-    <p class="lead">DeFiMap only reads public on-chain data. No keys, no approvals, no transactions. It can't move your funds, and it never asks to.</p>
+    <h2 data-i18n="p.title">Paste an address.<br><span class="grad">Sign nothing.</span></h2>
+    <p class="lead" data-i18n="p.lead">DeFiMap only reads public on-chain data. No keys, no approvals, no transactions. It can't move your funds, and it never asks to.</p>
     <ol class="steps">
-      <li><span class="mono">01</span>Add a wallet address</li>
-      <li><span class="mono">02</span>We rebuild its history from the chain</li>
-      <li><span class="mono">03</span>See every position, explained</li>
+      <li><span class="mono">01</span><span data-i18n="p.s1">Add a wallet address</span></li>
+      <li><span class="mono">02</span><span data-i18n="p.s2">We rebuild its history from the chain</span></li>
+      <li><span class="mono">03</span><span data-i18n="p.s3">See every position, explained</span></li>
     </ol>
   </div>
 </section>
@@ -348,20 +374,20 @@
 <section class="section" id="roadmap">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Roadmap</p>
-      <h2>This is just the beginning.</h2>
-      <p class="lead">Live today: liquidity accounting on Ethereum. Next: seven phases toward a multi-chain DeFi portfolio platform.</p>
+      <p class="eyebrow" data-i18n="r.eyebrow">Roadmap</p>
+      <h2 data-i18n="r.title">This is just the beginning.</h2>
+      <p class="lead" data-i18n="r.lead">Live today: liquidity accounting on Ethereum. Next: seven phases toward a multi-chain DeFi portfolio platform.</p>
     </div>
     <div class="rm">
       <div class="rm-line" aria-hidden="true"><i></i></div>
-      <div class="rm-item live reveal"><div class="rm-dot"></div><div class="rm-n mono">Now</div><h3>LP accounting</h3><p>Uniswap V2/V3/V4, Curve, Convex, StakeDAO, Aave V3 state.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c1)"><div class="rm-dot"></div><div class="rm-n mono">01</div><h3>Self-service</h3><p>Open sign-up and full account control.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c2)"><div class="rm-dot"></div><div class="rm-n mono">02</div><h3>Request any AMM</h3><p>Ask for a missing AMM; we index it.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c3)"><div class="rm-dot"></div><div class="rm-n mono">03</div><h3>Lending</h3><p>Aave and more, in the same PnL.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c4)"><div class="rm-dot"></div><div class="rm-n mono">04</div><h3>API &amp; MCP</h3><p>Partners and AI agents plug in.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c5)"><div class="rm-dot"></div><div class="rm-n mono">05</div><h3>Discovery</h3><p>Pools with potential, and visible risk.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c6)"><div class="rm-dot"></div><div class="rm-n mono">06</div><h3>More chains</h3><p>Solana and others, one portfolio.</p></div>
-      <div class="rm-item reveal" style="--c:var(--c7)"><div class="rm-dot"></div><div class="rm-n mono">07</div><h3>Ask your portfolio</h3><p>Chat backed by real numbers.</p></div>
+      <div class="rm-item live reveal"><div class="rm-dot"></div><div class="rm-n mono" data-i18n="r.now">Now</div><h3 data-i18n="r.0h">LP accounting</h3><p data-i18n="r.0p">Uniswap V2/V3/V4, Curve, Convex, StakeDAO, Aave V3 state.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c1)"><div class="rm-dot"></div><div class="rm-n mono">01</div><h3 data-i18n="r.1h">Self-service</h3><p data-i18n="r.1p">Open sign-up and full account control.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c2)"><div class="rm-dot"></div><div class="rm-n mono">02</div><h3 data-i18n="r.2h">Request any AMM</h3><p data-i18n="r.2p">Ask for a missing AMM; we index it.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c3)"><div class="rm-dot"></div><div class="rm-n mono">03</div><h3 data-i18n="r.3h">Lending</h3><p data-i18n="r.3p">Aave and more, in the same PnL.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c4)"><div class="rm-dot"></div><div class="rm-n mono">04</div><h3 data-i18n="r.4h">API &amp; MCP</h3><p data-i18n="r.4p">Partners and AI agents plug in.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c5)"><div class="rm-dot"></div><div class="rm-n mono">05</div><h3 data-i18n="r.5h">Discovery</h3><p data-i18n="r.5p">Pools with potential, and visible risk.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c6)"><div class="rm-dot"></div><div class="rm-n mono">06</div><h3 data-i18n="r.6h">More chains</h3><p data-i18n="r.6p">Solana and others, one portfolio.</p></div>
+      <div class="rm-item reveal" style="--c:var(--c7)"><div class="rm-dot"></div><div class="rm-n mono">07</div><h3 data-i18n="r.7h">Ask your portfolio</h3><p data-i18n="r.7p">Chat backed by real numbers.</p></div>
     </div>
   </div>
 </section>
@@ -370,33 +396,33 @@
 <section class="section faq-sec" id="faq">
   <div class="wrap faq-wrap">
     <div class="head left">
-      <p class="eyebrow">FAQ</p>
-      <h2>Questions,<br>answered.</h2>
+      <p class="eyebrow" data-i18n="q.eyebrow">FAQ</p>
+      <h2 data-i18n="q.title">Questions,<br>answered.</h2>
     </div>
     <div class="faq">
       <details>
-        <summary>Do I need to connect my wallet or sign anything?</summary>
-        <p>No. You paste an address or import it from your browser wallet. DeFiMap only reads public on-chain data. It never asks for signatures, approvals or keys, and it can't move funds.</p>
+        <summary data-i18n="q.1q">Do I need to connect my wallet or sign anything?</summary>
+        <p data-i18n="q.1a">No. You paste an address or import it from your browser wallet. DeFiMap only reads public on-chain data. It never asks for signatures, approvals or keys, and it can't move funds.</p>
       </details>
       <details>
-        <summary>Which networks and protocols are supported?</summary>
-        <p>Today: Ethereum mainnet with Uniswap V2, V3 and V4, Curve (including pools staked in Convex and StakeDAO) and Aave V3 positions. More chains and protocols are on the roadmap.</p>
+        <summary data-i18n="q.2q">Which networks and protocols are supported?</summary>
+        <p data-i18n="q.2a">Today: Ethereum mainnet with Uniswap V2, V3 and V4, Curve (including pools staked in Convex and StakeDAO) and Aave V3 positions. More chains and protocols are on the roadmap.</p>
       </details>
       <details>
-        <summary>How is impermanent loss calculated?</summary>
-        <p>Against simply holding the tokens you deposited. DeFiMap replays every deposit, withdrawal and transfer of the position in order, so adding or removing liquidity along the way is accounted for.</p>
+        <summary data-i18n="q.3q">How is impermanent loss calculated?</summary>
+        <p data-i18n="q.3a">Against simply holding the tokens you deposited. DeFiMap replays every deposit, withdrawal and transfer of the position in order, so adding or removing liquidity along the way is accounted for.</p>
       </details>
       <details>
-        <summary>What if my protocol isn't supported yet?</summary>
-        <p>Those positions still show up with their value, marked as not indexed, so your total stays honest. Requesting support for a new AMM is the next phase on the roadmap.</p>
+        <summary data-i18n="q.4q">What if my protocol isn't supported yet?</summary>
+        <p data-i18n="q.4a">Those positions still show up with their value, marked as not indexed, so your total stays honest. Requesting support for a new AMM is phase 2 of the roadmap.</p>
       </details>
       <details>
-        <summary>Can I use DeFiMap today?</summary>
-        <p>DeFiMap is in closed beta. You sign in with Google, and access is currently by invitation. Open sign-up is the first phase on the roadmap.</p>
+        <summary data-i18n="q.5q">Can I use DeFiMap today?</summary>
+        <p data-i18n="q.5a">DeFiMap is in closed beta. You sign in with Google, and access is currently by invitation. Open sign-up is the first phase on the roadmap.</p>
       </details>
       <details>
-        <summary>Is this investment advice?</summary>
-        <p>No. DeFiMap is an analytics tool. It shows what happened to your positions and why; decisions stay with you.</p>
+        <summary data-i18n="q.6q">Is this investment advice?</summary>
+        <p data-i18n="q.6a">No. DeFiMap is an analytics tool. It shows what happened to your positions and why; decisions stay with you.</p>
       </details>
     </div>
   </div>
@@ -407,10 +433,10 @@
   <div class="cta-glow" aria-hidden="true"></div>
   <div class="wrap">
     <img src="assets/img/logo.svg" alt="" class="cta-logo">
-    <h2>Stop guessing.<br><span class="grad">Start knowing.</span></h2>
+    <h2 data-i18n="cta.title">Stop guessing.<br><span class="grad">Start knowing.</span></h2>
     <div class="actions center">
-      <a class="btn btn-primary btn-lg" href="https://defi-map.com/">Open the app</a>
-      <a class="link-more" href="#roadmap">View the roadmap <span aria-hidden="true">›</span></a>
+      <a class="btn btn-primary btn-lg" href="https://defi-map.com/" data-i18n="cta.open">Open the app</a>
+      <a class="link-more" href="#roadmap" data-i18n="cta.roadmap">View the roadmap <span aria-hidden="true">›</span></a>
     </div>
   </div>
 </section>
@@ -420,11 +446,12 @@
 <footer class="foot">
   <div class="wrap foot-in">
     <div class="brand"><img src="assets/img/logo.svg" alt="" width="64" height="13"><span class="brand-name">DeFiMap</span></div>
-    <nav aria-label="Footer"><a href="#anatomy">Anatomy</a><a href="#features">Features</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a><a href="https://defi-map.com/">App</a></nav>
-    <p class="fine">© <span id="year">2026</span> DeFiMap. Analytics only, not investment advice. Figures on this page are illustrative.</p>
+    <nav aria-label="Footer"><a href="#anatomy" data-i18n="nav.anatomy">Anatomy</a><a href="#features" data-i18n="nav.features">Features</a><a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a><a href="#faq" data-i18n="nav.faq">FAQ</a><a href="https://defi-map.com/" data-i18n="foot.app">App</a></nav>
+    <p class="fine">© <span id="year">2026</span> DeFiMap. <span data-i18n="foot.note">Analytics only, not investment advice. Figures on this page are illustrative.</span></p>
   </div>
 </footer>
 
+<script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/site.js" defer></script>
 </body>
 </html>

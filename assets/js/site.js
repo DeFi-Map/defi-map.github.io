@@ -34,19 +34,19 @@
 
   // ---------- statement: split into words, light them up while scrolling ----------
   const words = $('[data-words]');
-  const tail = 'DeFiMap reads the story.';
-  const text = words.textContent.trim();
-  const cut = text.lastIndexOf(tail);
-  words.innerHTML = '';
-  const addWords = (s, cls) => s.split(/\s+/).filter(Boolean).forEach((w) => {
-    const span = document.createElement('span');
-    span.className = 'w' + (cls ? ' ' + cls : '');
-    span.textContent = w + ' ';
-    words.appendChild(span);
-  });
-  addWords(text.slice(0, cut));
-  addWords(tail, 'hl');
-  const wordEls = $$('.w', words);
+  let wordEls = [];
+  const splitWords = () => {
+    const parts = [...words.childNodes].map((n) => [n.textContent, n.nodeType === 1 && n.hasAttribute('data-hl')]);
+    words.innerHTML = '';
+    parts.forEach(([s, hl]) => s.split(/\s+/).filter(Boolean).forEach((w) => {
+      const span = document.createElement('span');
+      span.className = hl ? 'w hl' : 'w';
+      span.textContent = w + ' ';
+      words.appendChild(span);
+    }));
+    wordEls = $$('.w', words);
+  };
+  splitWords();
 
   // ---------- anatomy steps ----------
   const anatomy = $('.anatomy');
@@ -55,17 +55,10 @@
   const items = $$('.a-steps li');
   const big = $('[data-big]', vis);
   const lbl = $('[data-label]', vis);
-  const readouts = [
-    ['Deposit', '$10,000', ''],
-    ['If you had held', '$11,000', ''],
-    ['After impermanent loss', '$10,740', ''],
-    ['With fees earned', '$11,654', ''],
-    ['After gas', '$11,616', ''],
-    ['Net PnL', '+$1,616', 'up'],
-  ];
+  const readouts = () => (window.DM_I18N ? window.DM_I18N.readouts(window.DM_I18N.lang) : null);
   let curStep = -1;
-  const setStep = (s) => {
-    if (s === curStep) return;
+  const setStep = (s, force) => {
+    if (s === curStep && !force) return;
     curStep = s;
     vis.dataset.step = s;
     cols.forEach((c, i) => {
@@ -73,12 +66,14 @@
       c.classList.toggle('dim', s === 5 && i > 0 && i < 5);
     });
     items.forEach((li, i) => { li.classList.toggle('on', i === s); li.classList.toggle('done', i < s); });
-    const [l, v, cls] = readouts[s];
-    lbl.textContent = l;
-    big.textContent = v;
-    big.className = 'a-big num ' + cls;
+    const r = readouts();
+    if (r) { lbl.textContent = r[s][0]; big.textContent = r[s][1]; }
+    big.className = 'a-big num' + (s === 5 ? ' up' : '');
   };
   setStep(0);
+
+  // Re-split the statement and refresh the readout when the language changes.
+  document.addEventListener('dm:lang', () => { splitWords(); setStep(curStep, true); onScroll(); });
 
   // ---------- one rAF-throttled scroll loop ----------
   const device = $('[data-tilt]');
