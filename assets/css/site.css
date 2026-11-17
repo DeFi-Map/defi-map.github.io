@@ -320,7 +320,15 @@ h2 { font-size: clamp(40px, 6vw, 80px); font-weight: 700; text-wrap: balance; }
 .cta .wrap { position: relative; }
 .cta-logo { height: 30px; width: auto; margin: 0 auto 44px; }
 .cta h2 { font-size: clamp(52px, 9vw, 120px); font-weight: 800; letter-spacing: -.055em; line-height: .95; }
-.cta-sub { max-width: 640px; margin: 32px auto 0; }
+.offer { width: min(100%, 580px); margin: 44px auto 0; padding: 22px 28px 26px; border-radius: 24px; border: 1px solid var(--line-2); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.offer-tag { display: inline-flex; align-items: center; gap: 9px; font: 600 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+.offer-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px rgba(34,251,215,.15), 0 0 14px var(--brand); }
+.offer-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 18px; padding-top: 20px; border-top: 1px solid var(--line); }
+.offer-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 12px; }
+.offer-item + .offer-item { border-left: 1px solid var(--line); }
+.offer-num { font-size: clamp(44px, 5vw, 60px); font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+.offer-lbl { font-size: 15px; line-height: 1.35; color: var(--fg-1); text-wrap: balance; }
+@media (max-width: 480px) { .offer { padding: 20px 16px 22px; } .offer-item { padding: 0 8px; } .offer-lbl { font-size: 14px; } }
 
 /* footer */
 .foot { border-top: 1px solid var(--line); padding: 32px 0 40px; font-size: 13px; }
