@@ -2,7 +2,7 @@
 // Run with Bun (uses its built-in HTMLRewriter): `bun build.mjs`
 import { cp, mkdir, rm, readFile, writeFile } from 'node:fs/promises';
 
-const BASE = 'https://defi-map.github.io';
+const BASE = 'https://start.defi-map.com';
 const LANGS = ['en', 'ru'];
 const OUT = 'dist';
 
