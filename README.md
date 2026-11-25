@@ -1,6 +1,6 @@
 # DeFiMap landing page
 
-Served by GitHub Pages at https://defi-map.github.io/ — `/en/` and `/ru/`, with `/` redirecting to the visitor's language (saved choice, then browser languages, then English).
+Served by GitHub Pages at https://start.defi-map.com/ (custom domain set in repo Settings → Pages; defi-map.github.io redirects there) — `/en/` and `/ru/`, with `/` redirecting to the visitor's language (saved choice, then browser languages, then English).
 
 - `src/page.html` — page template; English copy is inline, translatable elements carry `data-i18n` keys
 - `src/i18n/en.json`, `src/i18n/ru.json` — page metadata, scroll-story readouts, and (for Russian) every `data-i18n` string
