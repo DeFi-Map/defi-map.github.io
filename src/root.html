@@ -19,7 +19,7 @@
         var a = navigator.languages || [navigator.language || ''];
         for (var i = 0; i < a.length && !l; i++) { var b = String(a[i]).toLowerCase().slice(0, 2); if (ok[b]) l = b; }
       }
-      location.replace('/' + (l || 'en') + '/' + location.hash);
+      location.replace('/' + (l || 'en') + '/' + location.search + location.hash);
     })();
   </script>
   <noscript><meta http-equiv="refresh" content="0; url=/en/"></noscript>
